@@ -1,0 +1,19 @@
+[
+{
+  "directory": "/home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/build",
+  "command": "/usr/bin/c99-gcc -Dapplib_EXPORTS -I../lib  -g -fPIC   -o lib/CMakeFiles/applib.dir/functions.c.o   -c /home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/lib/functions.c",
+  "file": "/home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/lib/functions.c"
+},
+
+{
+  "directory": "/home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/build",
+  "command": "/usr/bin/c99-gcc  -I../lib  -g   -o src/CMakeFiles/app.dir/main.c.o   -c /home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/src/main.c",
+  "file": "/home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/src/main.c"
+},
+
+{
+  "directory": "/home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/build",
+  "command": "/usr/bin/c99-gcc  -I../tests/../lib -I../lib  -g   -o tests/CMakeFiles/App-Unit-Tests.dir/tests_functions.c.o   -c /home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/tests/tests_functions.c",
+  "file": "/home/mpeschke/src/PARADIG-PROG-N1-ESTRUT-C99/tests/tests_functions.c"
+}
+]
