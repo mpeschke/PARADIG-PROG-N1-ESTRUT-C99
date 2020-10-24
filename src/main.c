@@ -1,7 +1,13 @@
-#include "functions.h"
+#include "exported_functions.h"
 
 int main()
 {
-    //int ret = function1();
+    // Exemplo de BAIXO ACOPLAMENTO e ALTA COESÃO entre componentes de um sistema. A interface não conhece absolutamente nenhum
+    // detalhe da implementação da biblioteca. Como esse modelo é possível, por exemplo, adicionar
+    // novas competições, mudar as regras do exercício, etc, sem precisar recompilar o cliente que consome a biblioteca.
+
+    // Inicia a competição, solicitando a entrada de dados para calcular os resultados.
+    iniciaCompeticao();
+
     return 0;
 }
