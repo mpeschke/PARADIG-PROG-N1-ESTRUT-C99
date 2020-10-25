@@ -42,7 +42,7 @@ struct RankingArremessoPeso{
 BOOL validaModalidade(char* pEntrada);
 
 /**
-    Valida a modalidade selecionada pelo usuário.
+    Valida os arremessos fornecidos.
 
     @param pEntrada buffer de string contendo os arremessos (float), separados por vírgulas.
     @param arremessos array contendo os arremessos (float) identificados no parâmetro pEntrada.
@@ -51,11 +51,12 @@ BOOL validaModalidade(char* pEntrada);
 BOOL validaArremessos(char* pEntrada, float arremessos[]);
 
 /**
-    Valida a modalidade selecionada pelo usuário.
+    Ordena os arremessos, do menor para o maior.
 
-    @param pEntrada buffer de string contendo os arremessos (float), separados por vírgulas.
+    @param adversario identifica o número do usuário (1,2,3, etc).
     @param arremessos array contendo os arremessos (float) identificados no parâmetro pEntrada.
-    @return TRUE (identificados todos os arremessos como válidos) ou FALSE (um ou mais ou todos os arremessos são inválidos)
+    @param padversario pointer para instância AdversarioArremessoPeso, para receber seu nome identificador
+    e seus arremessos ordenados.
 */
 void OrdenaRankingArremessos(const int adversario, const float arremessos[], struct AdversarioArremessoPeso* padversario);
 
