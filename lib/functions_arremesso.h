@@ -39,7 +39,7 @@ struct RankingArremessoPeso{
     @param pEntrada buffer de string contendo o que o usuário digitou como modalidade selecionada.
     @return TRUE (modalidade implementada) ou FALSE (modalidade não-implementada)
 */
-BOOL validaModalidadeArremesso(char* pEntrada);
+BOOL validaModalidade(char* pEntrada);
 
 /**
     Valida a modalidade selecionada pelo usuário.

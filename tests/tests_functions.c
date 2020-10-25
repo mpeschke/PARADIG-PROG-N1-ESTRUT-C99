@@ -10,11 +10,11 @@ void unittest_suites(const int funcao, int argc, char* argv[])
 
     switch(funcao)
     {
-        case 1: //validaModalidadeArremesso
+        case 1: //validaModalidade (Arremesso)
         {
             char buff[1024] = {'\0'};
             strncpy(buff, argv[2], 1024);
-            BOOL ret = validaModalidadeArremesso(buff);
+            BOOL ret = validaModalidade(buff);
             printf("Retorno: %s. Modalidade: '%s'.", ret ? strTRUE : strFALSE, buff);
             break;
         }
