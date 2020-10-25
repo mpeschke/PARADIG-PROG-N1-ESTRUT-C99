@@ -7,4 +7,14 @@
 #include "functions_ginastica.h"
 #include "functions_stdin.h"
 
+/**
+    Identifica e executa os testes unitários para as funções da biblioteca lib.
+
+    @param funcao inteiro identificando qual é a função da biblioteca a ser testada.
+    @param argc número de itens no parâmetro argv
+    @param argv contém todos os parâmetros da linha de comando da aplicação que 
+    executa os testes unitários.
+*/
+void unittest_suites(const int funcao, int argc, char* argv[]);
+
 #endif

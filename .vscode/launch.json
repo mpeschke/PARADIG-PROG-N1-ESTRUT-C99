@@ -30,7 +30,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/tests/App-Unit-Tests",
-            "args": ["1"],
+            "args": ["4", "0.0,1.0,3.0", "0.0,1.0,2.0"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

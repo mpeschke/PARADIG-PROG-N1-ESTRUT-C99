@@ -2,9 +2,13 @@
 #include "functions_arremesso.h"
 #include "exported_functions.h"
 
+// Mensagens de sistema.
 static const char* const pENTRADA_MODALIDADE_MENSAGEM = "Digite o número da modalidade (1-Arremesso de Peso, 2-Ginástica Artística): ";
 static const char* const pMODALIDADE_DESCONHECIDA_MENSAGEM = "Modalidade desconhecida. \nDigite o número da modalidade (1-Arremesso de Peso, 2-Ginástica Artística): ";
+static const char* const pVENCEDOR_MODALIDADE_ARREMESSO_MENSAGEM = "Vencedor da modalidade Arremesso de Peso: %s";
+static const char* const pEMPATE_MENSAGEM = "EMPATE";
 
+// Protótipo da função de execução da modalidade de Arremesso de Peso.
 void iniciaModalidadeArremessoDePeso(void);
 
 void iniciaCompeticao(void)
@@ -24,6 +28,7 @@ void iniciaCompeticao(void)
 
         if(validaModalidadeArremesso(buffMODALIDADE))
         {
+            // Passo 2: Executa a modalidade de competição selecionada.
             iniciaModalidadeArremessoDePeso();
             tentarModalidadeNovamente = FALSE;
         }
@@ -39,9 +44,10 @@ void iniciaCompeticao(void)
     }
 }
 
+// Implementação da função de execução da modalidade de Arremesso de Peso.
 void iniciaModalidadeArremessoDePeso(void)
 {
-    // Passo 2: Solicita a entrada de dados e processa o resultado.
+    // Solicita a entrada de dados dos arremessos dos adversários, processa e mostra o resultado.
     BOOL tentarLerArremessosAdversarioNovamente = TRUE;
     struct AdversarioArremessoPeso adversarios[ARREMESSO_NUMERO_ADVERSARIOS];
 
@@ -64,15 +70,18 @@ void iniciaModalidadeArremessoDePeso(void)
 
             // Solicita os arremessos do adversário.
             lerEntrada(buffARREMESSOS, ARREMESSOS_TAMANHO_BUFFER+WINDOWS_TERMINADOR_DE_LINHA, MENSAGEM_ENTRADA_ARREMESSOS_BUFFER);
-            // Incorretos? Solicita novamente e eternamente até o usuário digitá-los corretamente.
+            // Incorretos? Solicita novamente/eternamente até o usuário digitá-los corretamente.
             tentarLerArremessosAdversarioNovamente = !validaArremessos(buffARREMESSOS, arremessos);
             if(tentarLerArremessosAdversarioNovamente)
                 printf(pERROR_MESSAGE_ARREMESSOS_INVALIDOS, "");
-            else  // Copia os dados desse adversário para posterior cálculo do vencedor.
-                AdversarioArremessoPeso(i, arremessos, &adversarios[i]);
+            else  // Copia e ordena os arremessos desse adversário para posterior cálculo do vencedor.
+                OrdenaRankingArremessos(i+1, arremessos, &adversarios[i]);
         }
         tentarLerArremessosAdversarioNovamente = TRUE;
     }
 
-    
+    // Calcula o vencedor. A função é recursiva, portanto o primeiro parâmetro é zero e aumentado
+    // internamente para o cálculo do segundo melhor arremesso.
+    const struct AdversarioArremessoPeso* pvencedor = vencedorArremessoPeso(0, adversarios);
+    printf(pVENCEDOR_MODALIDADE_ARREMESSO_MENSAGEM, pvencedor == EMPATE_ARREMESSO ? pEMPATE_MENSAGEM : pvencedor->NOME);
 }

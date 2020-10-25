@@ -7,7 +7,9 @@ Contém todas as funções que são exportadas (públicas).
 #include <stdlib.h>
 #include <stdio.h>
 
-// Inicia o processamento de dados da competição escolhida.
+/**
+    Processamento de dados da competição escolhida.
+*/
 void iniciaCompeticao(void);
 
 #endif

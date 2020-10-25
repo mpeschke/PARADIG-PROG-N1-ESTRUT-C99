@@ -12,10 +12,6 @@ dificultando automação de testes unitários.
 #include "functions_stdin.h"
 #include "functions_arremesso.h"
 
-// Damos um apelido para quando não há um vencedor (retornando 'EMPATE_*' = NULL significa que não há uma instância 
-// representando um vencedor).
-#define EMPATE_ARREMESSO NULL
-
 // Como os parâmetros abaixo são regras do enunciado do serviço,
 // podemos colocar como uma constante #define. Isso provê
 // a facilidade de utilizá-las para definir tamanho de um array ou/em tipos estruturados.
@@ -39,9 +35,8 @@ BOOL validaArremessos(char* pEntrada, float arremessos[])
 
     // Primeira parte: usamos o strtok para inserir terminadores nulos
     // onde ele encontra o separador de valores de arremessos fornecidos pelo usuário.
-    // Assim podemos determinar que foram fornecidos TRÊS arremessos, separados por
-    // DUAS vírgulas.
-    // Por exemplo:
+    // Por exemplo, podemos determinar que foram fornecidos TRÊS arremessos, separados por
+    // DUAS vírgulas:
     // 45.2,3.0,42.44
     char *ptr = strtok(pEntrada, ENTRADA_ARREMESSOS_DELIM);
     char *strarremessos[NUMERO_ARREMESSOS] = {NULL};
@@ -77,7 +72,7 @@ BOOL validaArremessos(char* pEntrada, float arremessos[])
     return TRUE;
 }
 
-void AdversarioArremessoPeso(const int adversario, const float arremessos[], struct AdversarioArremessoPeso* padversario)
+void OrdenaRankingArremessos(const int adversario, const float arremessos[], struct AdversarioArremessoPeso* padversario)
 {
     sprintf(padversario->NOME, "Adversario %d", adversario);
     for(int a = 0; a < NUMERO_ARREMESSOS; a++)
@@ -97,7 +92,48 @@ void AdversarioArremessoPeso(const int adversario, const float arremessos[], str
         }
 }
 
-const struct AdversarioArremessoPeso* const vencedorArremessoPeso(const struct AdversarioArremessoPeso adversarios[])
+const struct AdversarioArremessoPeso* const vencedorArremessoPeso(const int melhormarca, const struct AdversarioArremessoPeso adversarios[])
 {
-    return EMPATE_ARREMESSO;
+    // Pelo enunciado do exercício, deve-se considerar apenas a segunda melhor marca como critério de desempate.
+    if(melhormarca > 1)
+        return EMPATE_ARREMESSO;
+
+    struct RankingArremessoPeso melhoresmarcas;
+
+    for (int a = 0; a < NUM_ADVERSARIOS; ++a)
+    {
+        melhoresmarcas.adversarios[a] = a;
+        melhoresmarcas.melhoresmarcas[a] = adversarios[a].arremessos[NUMERO_ARREMESSOS-1-melhormarca];
+    }
+
+    // Bubble sort para ordenar de acordo com a MELHOR marca dos adversários.
+    for (int i = 0; i < NUM_ADVERSARIOS; ++i)
+        for (int j = 0; j < NUM_ADVERSARIOS; j++)
+        {
+            // Em ordem crescente
+            if(melhoresmarcas.melhoresmarcas[i] < melhoresmarcas.melhoresmarcas[j])
+            {
+                float melhormarca = melhoresmarcas.melhoresmarcas[i];
+                int melhoradversario = melhoresmarcas.adversarios[i];
+
+                melhoresmarcas.melhoresmarcas[i] = melhoresmarcas.melhoresmarcas[j];
+                melhoresmarcas.adversarios[i] = melhoresmarcas.adversarios[j];
+
+                melhoresmarcas.melhoresmarcas[j] = melhormarca;
+                melhoresmarcas.adversarios[j] = melhoradversario;
+            }
+        }
+
+    // Primeiro passo: verificamos se não houve um empate.
+    const struct AdversarioArremessoPeso* pVencedor = 
+        melhoresmarcas.melhoresmarcas[NUM_ADVERSARIOS-1] == melhoresmarcas.melhoresmarcas[NUM_ADVERSARIOS-2] ? 
+            EMPATE_ARREMESSO : 
+            &adversarios[melhoresmarcas.adversarios[NUM_ADVERSARIOS-1]];
+
+    // Segundo passo: oh-oh, houve empate nos melhores arremessos dos adversários. Vamos
+    // usar o critério de desempate (segundo melhor arremesso) usando essa mesma função de forma recursiva.
+    if(pVencedor != EMPATE_ARREMESSO)
+        return pVencedor;
+    else
+        return vencedorArremessoPeso(melhormarca+1, adversarios);
 }
