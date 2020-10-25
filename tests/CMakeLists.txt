@@ -16,7 +16,7 @@ add_executable(
 target_link_libraries (App-Unit-Tests LINK_PUBLIC applib)
 
 # Template de testes unitários em que passamos dois parâmetros:
-# Função 1: validaModalidade (Arremesso)
+# Função 1: validaModalidadeArremesso
 # Função 2: validaArremessos
 # Função 3: OrdenaRankingArremessos
 function(do_test_two_args testname target testid arg1 arg2 result)

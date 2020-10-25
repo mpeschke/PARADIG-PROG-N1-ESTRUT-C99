@@ -15,7 +15,7 @@ dificultando automação de testes unitários.
 static const char* const STR_MODALIDADE_ARREMESSO = "1";
 const char ENTRADA_ARREMESSOS_DELIM[] = ",";
 
-BOOL validaModalidade(char* pEntrada)
+BOOL validaModalidadeArremesso(char* pEntrada)
 {
     // Converte a primeira instância de terminador de linha em '\0', 
     // independente de ser '\r\n' (Windows) ou '\n' (Linux)
