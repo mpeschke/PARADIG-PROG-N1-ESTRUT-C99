@@ -1,40 +1,49 @@
-# c99cmaketemplate
+# PARADIG-PROG-N1-ESTRUT-C99
 
-A template for good practices to build a C (C99 standard) project, comprised of an executable, a library and the unit tests using CMake with Visual Studio Code.
+Tutorial em vídeo demonstrando a aplicação do paradigma estruturado e detalhando as escolhas e implementações dessa aplicação: https://drive.google.com/drive/folders/1ZE8VH6yoOUFDHSy5b-DT3kto_GEmtxVS?usp=sharing  
 
-## Step 1: Dependencies
+Atividade de entrega para a aula de Paradigmas de Linguagens de Programação (prof. Bruno Moritani).  
 
-A Linux distro  
-Git >= 2.17.1, CMake >= 3.5 and (GCC >= 7.5.0 or CLang >= 6.0.0)  
-or  
+Paradigmas: Estruturado  
+Linguagem: C (C99 standard)  
+Compilador: GCC com CMake (também compatível com MingW no Windows)  
+
+## Passo 1: Dependências
+
+Uma distribuição Linux  
+Git >= 2.17.1, CMake >= 3.5 e (GCC >= 7.5.0 ou CLang >= 6.0.0)  
+ou  
 MacOS  
-Git >= 2.17.1, CMake >= 3.5 and CLang >= 6.0.0  
-Read: https://code.visualstudio.com/docs/cpp/lldb-mi  
+Git >= 2.17.1, CMake >= 3.5 e CLang >= 6.0.0  
+Leia: https://code.visualstudio.com/docs/cpp/lldb-mi  
 
-Example for installing the dependencies on Ubuntu 18.04:  
-*#apt install -y git cmake make gcc clang*
+Exemplo de instalação num Ubuntu 18.04:  
+>*#apt install -y git cmake make gcc clang*
 
 Visual Studio Code  
-Extensions:  
+Extensões:  
 C/C++ (ms-vscode.cpptools)  
 CMake Tools (ms-vscode.cmake-tools)  
 
-## Step 2: Building, Debugging and Unit Testing (Visual Studio Code)
+## Passo 2: Build, depuração e Testes Unitários (Visual Studio Code)
 
-Open this repo folder using Visual Studio Code. It will ask you which compiler to use (CLang or GCC). In case you prefer GCC, select the option specific to the C99 standard, as the CMake config files specifically set this standard to build the binaries.
+Abra a pasta desse repositório git baixado localmente no Visual Studio Code. Visual Studio Code imediatamente irá procurar pelos compiladores disponíveis e perguntar qual vc quer utilizar (CLang ou GCC). Caso prefira GCC, escolha a opção do C99 standard, pois várias configurações (CMake) e funções utilizadas nesse projeto dependem dessa versão da linguagem C.
 
-You can now go to 'Run' and find the following Visual Studio Code tasks available:  
-*CMake build and debug* (Build using CMake and start debugging the main application)  
-*CMake build and unittest* (Build using CMake and start debugging the unittest application)
+Você pode ir agora em 'Run' e encontrar as seguintes opções de build e depuração:  
+*CMake build and debug GDB* (Build e depuração da aplicação usando GCC + GDB)  
+*CMake build and unittest GDB* (Build e depuração dos testes unitários usando GCC + GDB)  
+*CMake build and debug LLDB* (Build e depuração da aplicação usando CLang + LLDB)  
+*CMake build and debug unittest LLDB* (Build e depuração da aplicação usando CLang + LLDB)  
 
-At the bottom of the Visual Studio Code IDE, you can also click on the button 'Run CTest'.
+No canto inferior direito do VSCode, você pode rodar os testes clicando em 'Run CTest'.
 
-## Step 3: Building and Unit Testing (Command Line - No IDE)
+## Passo 3: Build e Testes Unitários (Linha de Comando - sem IDE)
 
-On a terminal:
+Num terminal:  
 
-*$git clone https://github.com/mpeschke/c99cmaketemplate.git*  
-*$cd c99cmaketemplate/*  
+(Até a entrega, esse repositório é PRIVADO)  
+*$git clone https://github.com/mpeschke/PARADIG-PROG-N1-ESTRUT-C99.git*  
+*$cd PARADIG-PROG-N1-ESTRUT-C99/*  
 *$mkdir build*  
 *$cd build/*  
 *$cmake -DCMAKE_BUILD_TYPE=Debug ../.*  
