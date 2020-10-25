@@ -1,25 +1,39 @@
 #include "tests_functions.h"
 
-void test_unittests_function_1()
+static const char* const strTRUE = "TRUE";
+static const char* const strFALSE = "FALSE";
+
+void unittest_suites(const int funcao, int argc, char* argv[])
 {
-    //printf("Function function1 expected to return %d", function1());
-    printf("Function function1 expected to return %d", 0);
+    char buff[1024] = {'\0'};
+
+    switch(funcao)
+    {
+        case 1: //validaModalidadeArremesso
+        {
+            char buff[1024] = {'\0'};
+            strncpy(buff, argv[2], 1024);
+            BOOL ret = validaModalidadeArremesso(buff);
+            printf("Retorno: %s. Modalidade: '%s'.", ret ? strTRUE : strFALSE, buff);
+            break;
+        }
+        case 2: //validaArremessos
+        {
+            char buff[1024] = {'\0'};
+            strncpy(buff, argv[2], 1024);
+            float arremessos[3] = {0.0f};
+            BOOL ret = validaArremessos(buff, arremessos);
+            printf("Retorno: %s.", ret ? strTRUE : strFALSE);
+            break;
+        }
+        default:
+            break;
+    };
 }
 
 int main(int argc, char* argv[])
 {
-    int func = atoi(argv[1]);
-
-    switch(func)
-    {
-        case 1:
-            test_unittests_function_1();
-            break;
-        default:
-            break;
-    }
+    unittest_suites(atoi(argv[1]), argc, argv);
 
     return 0;
 }
-
-// li e concordo com os termos da aps

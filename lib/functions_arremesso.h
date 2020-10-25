@@ -13,9 +13,8 @@
 #define ARREMESSOS_TAMANHO_BUFFER 100
 #define ARREMESSO_NUMERO_ADVERSARIOS 2
 
-static char* const pMENSAGEM_ENTRADA_ARREMESSOS = "Entre com os %d arremessos do adversário %d: (Exemplo: 9.7,10.0,...): ";
-static char* const pERROR_MESSAGE_ARREMESSOS_INVALIDOS = "Há um problema com os arremessos fornecidos. Forneça três arremessos, em metros, separados por vírgulas. Exemplo: 10.8,4.82,12.93.";
-static char* const pERROR_MESSAGE_MODALIDADE_ARREMESSOS_INVALIDA = "Modalidade não é de arremesso de pesos.";
+static const char* const pMENSAGEM_ENTRADA_ARREMESSOS = "Entre com os %d arremessos do adversário %d: (Exemplo: 9.7,10.0,...): ";
+static const char* const pERROR_MESSAGE_ARREMESSOS_INVALIDOS = "Há um problema com os arremessos fornecidos. Forneça três arremessos, em metros, separados por vírgulas. Exemplo: 10.8,4.82,12.93.";
 
 // Estruturas de dados. Proporciona o agrupamento
 // de informações relacionadas.
@@ -24,14 +23,17 @@ struct AdversarioArremessoPeso{
     float arremessos[NUMERO_ARREMESSOS];
 };
 
+struct RankingArremessoPeso{
+    int adversarios[ARREMESSO_NUMERO_ADVERSARIOS];
+    float melhoresmarcas[ARREMESSO_NUMERO_ADVERSARIOS];
+};
+
 // Funções.
-BOOL validaModalidadeArremesso(char* pEntrada, const char* pERROR_MESSAGE);
+BOOL validaModalidadeArremesso(char* pEntrada);
 
-BOOL validaArremessos(char* pEntrada, float arremessos[], const char* pERROR_MESSAGE);
+BOOL validaArremessos(char* pEntrada, float arremessos[]);
 
-float melhorArremesso(const struct AdversarioArremessoPeso* pAdversario);
-
-float segundoMelhorArremesso(const struct AdversarioArremessoPeso* pAdversario);
+void AdversarioArremessoPeso(const int adversario, const float arremessos[], struct AdversarioArremessoPeso* padversario);
 
 const struct AdversarioArremessoPeso* const vencedorArremessoPeso(const struct AdversarioArremessoPeso adversarios[]);
 

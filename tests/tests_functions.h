@@ -5,5 +5,6 @@
 #include <string.h>
 #include "functions_arremesso.h"
 #include "functions_ginastica.h"
+#include "functions_stdin.h"
 
 #endif
