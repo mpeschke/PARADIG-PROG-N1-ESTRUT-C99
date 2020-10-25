@@ -55,9 +55,11 @@ do_test_two_args("ArremessoDePeso_ArremessoNaoEhFloat"                          
 do_test_two_args("ArremessoDePeso_ArremessoNaoEhFloat"                                    App-Unit-Tests  15   2 "you,say,hello"                    "Retorno: FALSE.")
 do_test_two_args("ArremessoDePeso_ArremessoNaoEhFloat"                                    App-Unit-Tests  16   2 "andI,say,goodbye"                 "Retorno: FALSE.")
 do_test_two_args("ArremessoDePeso_ArremessoFloatMaximo"                                   App-Unit-Tests  17   2 "3.40282e+38,2.0,3.0"              "Retorno: TRUE.")
-do_test_two_args("ArremessoDePeso_ArremessoFloatMinimo"                                   App-Unit-Tests  18   2 "1.17548e-37,2.0,3.0"              "Retorno: TRUE.")
-do_test_two_args("ArremessoDePeso_ArremessoFloatOverflow"                                 App-Unit-Tests  19   2 "3.40283e+38,2.0,3.0"              "Retorno: FALSE.")
-do_test_two_args("ArremessoDePeso_ArremessoFloatUnderflow"                                App-Unit-Tests  20   2 "1.17548e-40,2.0,3.0"              "Retorno: FALSE.")
+do_test_two_args("ArremessoDePeso_ArremessoFloatOverflow"                                 App-Unit-Tests  18   2 "3.40283e+38,2.0,3.0"              "Retorno: FALSE.")
+do_test_two_args("ArremessoDePeso_ArremessoMenorQueZero_NotacaoDecimal"                   App-Unit-Tests  19   2 "0.8,2.0,-5.9"                     "Retorno: FALSE.")
+
+# Notar que utilizamos o mínimo valor para float (a comparação no código está dentro do epsilon de comparação entre números float).
+do_test_two_args("ArremessoDePeso_ArremessoMenorQueZero_NotacaoCientifica"                App-Unit-Tests  20   2 "0.8,-1.17549e-38,2.0"             "Retorno: FALSE.")
 
 do_test_two_args("ArremessoDePeso_MelhorArremesso_JaOrdenado"                             App-Unit-Tests  21   3 "1.0,2.0,3.0"                      "Melhor arremesso: 3.00")
 do_test_two_args("ArremessoDePeso_MelhorArremesso_NaoOrdenado"                            App-Unit-Tests  22   3 "4.43,5.77,1.29"                   "Melhor arremesso: 5.77")

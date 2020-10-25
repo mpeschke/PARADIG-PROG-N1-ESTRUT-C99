@@ -12,12 +12,6 @@ dificultando automação de testes unitários.
 #include "functions_stdin.h"
 #include "functions_arremesso.h"
 
-// Como os parâmetros abaixo são regras do enunciado do serviço,
-// podemos colocar como uma constante #define. Isso provê
-// a facilidade de utilizá-las para definir tamanho de um array ou/em tipos estruturados.
-// (que não é aceito pelo compilador caso sejam declaradas como const <tipo> <variável> = <valor>).
-#define NUM_ADVERSARIOS 2
-
 static const char* const STR_MODALIDADE_ARREMESSO = "1";
 const char ENTRADA_ARREMESSOS_DELIM[] = ",";
 
@@ -66,6 +60,9 @@ BOOL validaArremessos(char* pEntrada, float arremessos[])
             errno = 0;
             return FALSE;
         }
+        // Bugfix: obviamente a distância do arremesso tem que ser maior que zero.
+        if(candidate < 0.0f)
+            return FALSE;
         arremessos[i] = candidate;
     }
 
@@ -100,15 +97,15 @@ const struct AdversarioArremessoPeso* const vencedorArremessoPeso(const int melh
 
     struct RankingArremessoPeso melhoresmarcas;
 
-    for (int a = 0; a < NUM_ADVERSARIOS; ++a)
+    for (int a = 0; a < ARREMESSO_NUMERO_ADVERSARIOS; ++a)
     {
         melhoresmarcas.adversarios[a] = a;
         melhoresmarcas.melhoresmarcas[a] = adversarios[a].arremessos[NUMERO_ARREMESSOS-1-melhormarca];
     }
 
     // Bubble sort para ordenar de acordo com a MELHOR marca dos adversários.
-    for (int i = 0; i < NUM_ADVERSARIOS; ++i)
-        for (int j = 0; j < NUM_ADVERSARIOS; j++)
+    for (int i = 0; i < ARREMESSO_NUMERO_ADVERSARIOS; ++i)
+        for (int j = 0; j < ARREMESSO_NUMERO_ADVERSARIOS; j++)
         {
             // Em ordem crescente
             if(melhoresmarcas.melhoresmarcas[i] < melhoresmarcas.melhoresmarcas[j])
@@ -126,9 +123,9 @@ const struct AdversarioArremessoPeso* const vencedorArremessoPeso(const int melh
 
     // Primeiro passo: verificamos se não houve um empate.
     const struct AdversarioArremessoPeso* pVencedor = 
-        melhoresmarcas.melhoresmarcas[NUM_ADVERSARIOS-1] == melhoresmarcas.melhoresmarcas[NUM_ADVERSARIOS-2] ? 
+        melhoresmarcas.melhoresmarcas[ARREMESSO_NUMERO_ADVERSARIOS-1] == melhoresmarcas.melhoresmarcas[ARREMESSO_NUMERO_ADVERSARIOS-2] ? 
             EMPATE_ARREMESSO : 
-            &adversarios[melhoresmarcas.adversarios[NUM_ADVERSARIOS-1]];
+            &adversarios[melhoresmarcas.adversarios[ARREMESSO_NUMERO_ADVERSARIOS-1]];
 
     // Segundo passo: oh-oh, houve empate nos melhores arremessos dos adversários. Vamos
     // usar o critério de desempate (segundo melhor arremesso) usando essa mesma função de forma recursiva.
