@@ -1,6 +1,6 @@
 # PARADIG-PROG-N1-ESTRUT-C99
 
-Tutorial em vídeo demonstrando a aplicação do paradigma estruturado e detalhando as escolhas e implementações dessa aplicação: https://drive.google.com/drive/folders/1ZE8VH6yoOUFDHSy5b-DT3kto_GEmtxVS?usp=sharing  
+Tutorial em vídeo demonstrando a aplicação do paradigma estruturado e detalhando as escolhas e implementações dessa aplicação: https://photos.app.goo.gl/AkCjGWnf2LwJLgkq7 (PARADIG-PROG-N1-ESTRUT-C99.mkv)  
 
 Atividade de entrega para a aula de Paradigmas de Linguagens de Programação (prof. Bruno Moritani).  
 
